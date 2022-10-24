@@ -4,13 +4,13 @@
 #include "stadfx.h"
 
 
-namespace GameObjects {
-	static std::map<std::string,gRectangle*> rects;
-	//static std::vector<Sprite*> sprites;
-}
+
 class Game
 {
 public:
+	
+	std::map<std::string, gRectangle*> rects;
+	
 	Game() {
 		display.createWindow("Game");
 		gameInit();
@@ -28,7 +28,7 @@ private:
 				}
 			}
 			display.clearDisplay();
-			for (auto& rect : GameObjects::rects) {
+			for (auto& rect : rects) {
 				rect.second->draw(display);
 				rect.second->Update();
 			}
