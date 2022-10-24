@@ -8,7 +8,9 @@
 class Game
 {
 public:
-	
+	bool isKeyPressed(sf::Keyboard::Key key) {
+		return display.isKeyPressed(key);
+	}
 	std::map<std::string, gRectangle*> rects;
 	
 	Game() {

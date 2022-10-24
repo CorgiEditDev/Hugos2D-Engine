@@ -145,7 +145,7 @@
     <ClInclude Include="Core\GameObject.h" />
     <ClInclude Include="Core\GameObject\Rectangle.h" />
     <ClInclude Include="Core\stadfx.h" />
-    <ClInclude Include="SCRIPT\Main.hpp" />
+    <ClInclude Include="SCRIPT\Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Core\Display.cpp" />
@@ -153,6 +153,10 @@
     <ClCompile Include="Core\Game.cpp" />
     <ClCompile Include="Core\GameObject.cpp" />
     <ClCompile Include="Core\GameObject\Rectangle.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\Fragment_shader.frag" />
+    <None Include="Shaders\Vertex_shader.vert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

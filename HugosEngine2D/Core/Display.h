@@ -13,7 +13,7 @@ public:
 		create(sf::VideoMode(sf::VideoMode::getDesktopMode().width,
 										sf::VideoMode::getDesktopMode().height), title
 										,sf::Style::None);
-		setFramerateLimit(144);
+		//setFramerateLimit(144);
 	}
 	
 	void setClearColor(sf::Color clearColor) { this->clearColor = clearColor;  };

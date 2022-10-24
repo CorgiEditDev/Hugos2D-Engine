@@ -18,7 +18,7 @@
     <ClInclude Include="Core\Display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="SCRIPT\Main.hpp">
+    <ClInclude Include="SCRIPT\Main.cpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Game.h">
@@ -50,5 +50,9 @@
     <ClCompile Include="Core\GameObject\Rectangle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\Fragment_shader.frag" />
+    <None Include="Shaders\Vertex_shader.vert" />
   </ItemGroup>
 </Project>
