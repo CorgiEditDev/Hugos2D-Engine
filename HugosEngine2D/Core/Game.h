@@ -2,7 +2,9 @@
 #include "Display.h"
 #include "GameObject/Rectangle.h"
 #include "GameObject/Sprite.h"
+#include "Shader.h"
 #include "stadfx.h"
+
 
 
 
@@ -38,28 +40,13 @@ public:
 	std::map<std::string, hg::Rectangle*> rects;
 	std::map < std::string, hg::Sprite* > sprites;
 	Game() {
-		sf::Shader shader;
-		const std::string url = "Shaders\\";
-		if (!shader.loadFromFile(url + "vertex_shader.vert", sf::Shader::Vertex)) shaderError();
-		if (!shader.loadFromFile(url + "fragment_shader.frag", sf::Shader::Fragment)) shaderError();
-		if (!shader.loadFromFile(url + "vertex_shader.vert", url + "fragment_shader.frag")) shaderError();
-		if (shadersLoadedCorrectly) {
-			logl("All shaders loaded correctly");
-		}
+		shader.loadShaders(std::make_pair("Shaders\\Fragment_shader.frag", "Shaders\Vertex_shader.vert"));
 		display.createWindow("Game");
 		gameInit();
 		m_gameLoop();
 	}
 private:
-	bool shadersLoadedCorrectly = true;
-	void shaderError() {
-		using namespace std;
-		shadersLoadedCorrectly = false;
-		logt(10, "/");
-		logl("COULD NOT LOAD THE SHADER FILE!");
-		logt(10, "/");
-	}
-	sf::Shader shader;
+	hg::Shader shader;
 	float deltaTime = 0.0f;
 	sf::Clock deltaCock;
 	void m_gameLoop() {
