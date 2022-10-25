@@ -1,18 +1,21 @@
 #include "Game.h"
-
+hg::texture tx;
 void Game::gameInit()
 {
-	rects.insert({ "Player",
-			new gRectangle(sf::Vector2f(100, 100), sf::Vector2f(10, 10),sf::Color::Red) });
+	tx.load("Assets\\enemy.png");
+	
+	newGameObject("Player",new hg::Sprite(sf::Vector2f(100, 100), sf::Vector2f(100, 100), tx));
 }
+			
 void Game::gameLoop(float delta)
 {
-	if (isKeyPressed(sf::Keyboard::D))
-		rects.at("Player")->move(1, 0);
+	sprites.at("Player")->move(0.5, 0,1);
+	/*if (isKeyPressed(sf::Keyboard::D))
+		getGameObject("Player", GameObject::Type::Sprite).move(0.1,0,deltaTime);
 	if (isKeyPressed(sf::Keyboard::A))
-		rects.at("Player")->move(-1, 0);
+		getGameObject("Player", GameObject::Type::Sprite).move(-0.1, 0, deltaTime);
 	if (isKeyPressed(sf::Keyboard::W))
-		rects.at("Player")->move(0, -1);
+		getGameObject("Player", GameObject::Type::Sprite).move(0, -0.1, deltaTime);
 	if (isKeyPressed(sf::Keyboard::S))
-		rects.at("Player")->move(0, 1);
-}
+		getGameObject("Player", GameObject::Type::Sprite).move(0, 0.1, deltaTime);
+*/}

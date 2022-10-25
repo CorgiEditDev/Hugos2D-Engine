@@ -1,23 +1,25 @@
 #pragma once
 #include "..\GameObject.h"
-class gRectangle : public GameObject
-{
-public:
-	gRectangle(sf::Vector2f siz, sf::Vector2f pos, sf::Color color = sf::Color::White) : GameObject(pos,siz)
+namespace hg {
+	class Rectangle : public GameObject
 	{
-		this->color = color;
-	}
-	void draw(sf::RenderTarget&target) {
-		target.draw(rect);
-	}
+	public:
+		Rectangle(sf::Vector2f siz, sf::Vector2f pos, sf::Color color = sf::Color::White) : GameObject(pos, siz)
+		{
+			this->color = color;
+		}
+		void draw(sf::RenderTarget& target, const sf::Shader* shader) {
+			target.draw(rect, shader);
+		}
 
-	void Update() {
-		rect.setSize(getSize());
-		rect.setFillColor(color);
-		rect.setPosition(getPosition());
-	}
-//private:
-	sf::Color color;
-	sf::RectangleShape rect;
-};
+		void Update() {
+			rect.setSize(getSize());
+			rect.setFillColor(color);
+			rect.setPosition(getPosition());
+		}
+		//private:
+		sf::Color color;
+		sf::RectangleShape rect;
+	};
+}
 
