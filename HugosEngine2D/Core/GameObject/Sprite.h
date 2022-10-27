@@ -28,7 +28,7 @@ namespace hg {
 	class Sprite : public GameObject
 	{
 	public:
-		Sprite(sf::Vector2f siz, sf::Vector2f pos, texture txt) : GameObject(pos, siz)
+		Sprite(sf::Vector2f siz, sf::Vector2f pos, texture txt, bool phys, uint16_t i) : GameObject(pos, siz,phys,i)
 		{
 			txSize = txt.resolution;
 			txtr.loadFromFile(txt.getFilePath());
@@ -37,7 +37,9 @@ namespace hg {
 		void draw(sf::RenderTarget& target, const sf::Shader*shader) {
 			target.draw(sprite,shader);
 		}
-		void Update() {
+		void Update(const uint16_t deltaTime) {
+			getPhysics().update(deltaTime);
+			move(getPhysics().velocity, deltaTime);
 			sprite.setScale(getSize().x / txSize.x,getSize().y / txSize.y);
 			sprite.setPosition(getPosition());
 		}
