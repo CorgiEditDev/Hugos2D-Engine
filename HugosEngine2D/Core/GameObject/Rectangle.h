@@ -6,6 +6,7 @@ namespace hg {
 	public:
 		Rectangle(sf::Vector2f siz, sf::Vector2f pos, sf::Color color,bool phys,uint16_t i) : GameObject(pos, siz,phys,i)
 		{
+			rect.setOrigin(siz.x / 2,siz.y/2);
 			this->color = color;
 		}
 		void draw(sf::RenderTarget& target, const sf::Shader* shader) {
@@ -13,8 +14,8 @@ namespace hg {
 		}
 
 		void Update(const uint16_t deltaTime) {
-			hitbox.top = getPosition().y;
-			hitbox.left = getPosition().x;
+			hitbox.top = getPosition().y-getSize().y/2;
+			hitbox.left = getPosition().x - getSize().x / 2;
 			hitbox.width = getSize().x;
 			hitbox.height = getSize().y;
 			getPhysics().update(deltaTime);

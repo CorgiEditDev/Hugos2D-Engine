@@ -4,7 +4,8 @@
 #include "GameObject/Sprite.h"
 #include "Shader.h"
 #include "stadfx.h"
-
+#include "imgui.h"
+#include "imgui-SFML.h"
 
 
 
@@ -31,8 +32,18 @@ public:
 			
 				if (obj.id != r.second->id) {
 						if (obj.hitbox.intersects(r.second->hitbox)) {
-							obj.absMove(-(obj.getPhysics().velocity.x),
-								-(obj.getPhysics().velocity.y+10*250), (deltaTime / 250));
+							if (obj.getPosition().x < r.second->getPosition().x) {
+								obj.absMove(-(obj.getPhysics().velocity.x + 10 * 250),0,deltaTime/250);
+							}
+							else if (obj.getPosition().x > r.second->getPosition().x) {
+								obj.absMove((obj.getPhysics().velocity.x + 10 * 250), 0,deltaTime/250);
+							}
+							if (obj.getPosition().y > r.second->getPosition().y) {
+								obj.absMove(0,(obj.getPhysics().velocity.x + 10 * 250), deltaTime / 250);
+							}
+							else if (obj.getPosition().y < r.second->getPosition().y) {
+								obj.absMove(0, -(obj.getPhysics().velocity.x + 10 * 250), deltaTime / 250);
+							}
 						}
 				}
 				else {
@@ -69,6 +80,8 @@ public:
 		
 		shader.loadShaders(std::make_pair("Shaders\\Fragment_shader.frag", "Shaders\Vertex_shader.vert"));
 		display.createWindow("Game");
+		ImGui::SFML::Init(display);
+
 		gameInit();
 		view.setSize(display.getSize().x, display.getSize().y);
 		m_gameLoop();
@@ -88,14 +101,23 @@ private:
 	sf::Clock deltaCock;
 	void m_gameLoop() {
 		while (running) {
+			
+			
+
+			display.clearDisplay();
 			while (display.hasEvents()) {
+				ImGui::SFML::ProcessEvent(display._winEvent);
 				if (display.shouldClose()) {
 					display.closeWindow();
 					running = false;
 				}
 			}
-			display.clearDisplay();
 			display.setView(view);
+			ImGui::SFML::Update(display, deltaCock.getElapsedTime());		
+			ImGui::Begin("HugosEngine simulation control panel");
+			ImGui::Text("Hello");
+			ImGui::End();
+
 			for (auto& rect : rects) {
 				rect.second->draw(display, &shader);
 				rect.second->Update(deltaTime);
@@ -104,11 +126,15 @@ private:
 				rect.second->draw(display,&shader);
 				rect.second->Update(deltaTime);
 			}
+			
 			gameLoop(deltaTime);
 			display.show();
+			
 			deltaTime = deltaCock.restart().asMicroseconds()/100;
 		}
+		ImGui::SFML::Shutdown();
 	}
+
 	bool running = true;
 	Display display;
 	void gameInit();

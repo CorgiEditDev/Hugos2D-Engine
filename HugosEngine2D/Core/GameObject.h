@@ -41,7 +41,7 @@ namespace hg {
 			return size;
 		}
 		void move(sf::Vector2f offset, float d) {
-			sf::Vector2f offset(offset.x * 10, offset.y * 10);
+			offset.x *= 10;offset.y *= 10;
 			std::clamp(physics.velocity.x, (float)0, offset.x);
 			physics.velocity.x += sin((offset.x * (d / 250)) / 500);
 			std::clamp(physics.velocity.x, (float)0, offset.y);
@@ -49,9 +49,9 @@ namespace hg {
 		}
 		void move(float x,float y, float d) {
 			sf::Vector2f offset(x*10, y*10);
-			std::clamp(physics.velocity.x, (float)0, offset.x);
+			//std::clamp(physics.velocity.x, (float)0, offset.x);
 			physics.velocity.x += sin((offset.x * (d / 250)) / 500);
-			std::clamp(physics.velocity.x, (float)0, offset.y);
+			//std::clamp(physics.velocity.x, (float)0, offset.y);
 			physics.velocity.y += sin((offset.y * (d / 250)) / 500);
 		}
 		void absMove(float x, float y, float d) {
@@ -65,7 +65,7 @@ namespace hg {
 	
 		sf::FloatRect hitbox;
 		uint16_t id;
-		uint16_t weight = 20;
+		uint16_t weight = 2000;
 	private:
 		
 		PhysicsComponent physics;
