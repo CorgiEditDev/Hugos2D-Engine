@@ -5,16 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Graphical_User_Interface"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid Background="#292929">
+        Title="HugosEngine Launcher" Height="450" Width="800">
+    <Grid Background="#292929" Name="grid">
         <Grid.RowDefinitions>
             <RowDefinition Height="64*"/>
             <RowDefinition Height="153*"/>
         </Grid.RowDefinitions>
-        <Image Source="C:\Users\mauri\source\repos\HugosEngine2D\Graphical User Interface\Assets\Hugos.png" HorizontalAlignment="Left" Height="100" Margin="10,0,0,0" VerticalAlignment="Center" Width="268"/>
+        <Border Background="White"  CornerRadius="5" Margin="10,10,524,8">
+            <Image Source="C:\Users\mauri\source\repos\HugosEngine2D\Graphical User Interface\Assets\Hugos.png" HorizontalAlignment="Left" Height="100" VerticalAlignment="Center" Width="268"/>
+        </Border>
         <Border BorderBrush="Black" Margin="150,28,150,0" Grid.Row="1"/>
         <StackPanel x:Name="Projects" Margin="150,28,150,0" Background="#292929" Grid.Row="1">
-            <TextBlock FontFamily=""  Foreground="WhiteSmoke" Text="   Recent projects"/>
+            <TextBlock FontFamily="dC:\Users\mauri\source\repos\HugosEngine2D\Graphical User Interface\Assets\Fonts\segoeui.ttf"  Foreground="WhiteSmoke" Text="   Recent projects"/>
         </StackPanel>
         
         <Button x:Name="OpenFileButton" Content="Open file" Click="OpenFileButton_Click" Margin="588,281,150,0" Grid.Row="1"/>

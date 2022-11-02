@@ -54,10 +54,25 @@ namespace hg {
 			//std::clamp(physics.velocity.x, (float)0, offset.y);
 			physics.velocity.y += sin((offset.y * (d / 250)) / 500);
 		}
+		/// <summary>
+		/// Be aware : absMoveX and absMoveY also exist
+		/// </summary>
+		/// <param name="x">new X position</param>
+		/// <param name="y">new Y  position</param>
+		/// <param name="d">deltaTime</param>
 		void absMove(float x, float y, float d) {
+			
 			position.x += x * (d / 250);
 			position.y += y*(d/250);
 			physics.velocity = { 0,0 };
+		}
+		void absMoveX(float x,float d) {
+			position.x += x * (d / 250);
+			physics.velocity.x = 0;
+		}
+		void absMoveY(float y, float d) {
+			position.y += y * (d / 250);
+			physics.velocity.y = 0;
 		}
 		PhysicsComponent& getPhysics() {
 			return physics;

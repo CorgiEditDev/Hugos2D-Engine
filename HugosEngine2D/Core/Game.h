@@ -24,7 +24,8 @@ public:
 			pow(x.y - y.y, 2));
 	}
 	template<typename T>
-	void checkCollisionsFor(T & obj, hg::GameObject::Type type) {
+	bool checkCollisionsFor(T & obj, hg::GameObject::Type type) {
+		bool ret = false;
 		switch (type)
 		{
 		case hg::GameObject::RectangleShape:
@@ -32,17 +33,15 @@ public:
 			
 				if (obj.id != r.second->id) {
 						if (obj.hitbox.intersects(r.second->hitbox)) {
-							if (obj.getPosition().x < r.second->getPosition().x) {
-								obj.absMove(-(obj.getPhysics().velocity.x + 10 * 250),0,deltaTime/250);
-							}
-							else if (obj.getPosition().x > r.second->getPosition().x) {
-								obj.absMove((obj.getPhysics().velocity.x + 10 * 250), 0,deltaTime/250);
-							}
+							ret = true;
+					
 							if (obj.getPosition().y > r.second->getPosition().y) {
-								obj.absMove(0,(obj.getPhysics().velocity.x + 10 * 250), deltaTime / 250);
+								obj.absMoveY((obj.getPhysics().velocity.x + 10 * 250), deltaTime / 250);
+								break;
 							}
 							else if (obj.getPosition().y < r.second->getPosition().y) {
-								obj.absMove(0, -(obj.getPhysics().velocity.x + 10 * 250), deltaTime / 250);
+								obj.absMoveY(-(obj.getPhysics().velocity.x + 10 * 250), deltaTime / 250);
+								break;
 							}
 						}
 				}
@@ -56,6 +55,7 @@ public:
 		default:
 			break;
 		}
+		return ret;
 	}
 	hg::GameObject &getGameObject(const std::string& id, hg::GameObject::Type type) {
 		switch (type)

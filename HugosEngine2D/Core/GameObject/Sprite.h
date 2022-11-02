@@ -28,7 +28,13 @@ namespace hg {
 	class Sprite : public GameObject
 	{
 	public:
-		Sprite(sf::Vector2f siz, sf::Vector2f pos, texture txt, bool phys, uint16_t i) : GameObject(pos, siz,phys,i)
+		Sprite(sf::Vector2f siz, sf::Vector2f pos, texture txt, uint16_t i,bool phys = false) : GameObject(pos, siz,phys,i)
+		{
+			txSize = txt.resolution;
+			txtr.loadFromFile(txt.getFilePath());
+			sprite.setTexture(txtr);
+		}
+		Sprite(float width,float height, float x, float y, texture txt, uint16_t i,bool phys = false) : GameObject({x,y}, {width,height}, phys, i)
 		{
 			txSize = txt.resolution;
 			txtr.loadFromFile(txt.getFilePath());

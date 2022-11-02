@@ -1,0 +1,36 @@
+﻿<Window x:Class="Graphical_User_Interface.Editor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Graphical_User_Interface"
+        mc:Ignorable="d"
+        Title="Editor" Height="450" Width="800"
+        WindowStyle="None"
+        WindowState="Maximized">
+    <Grid>
+
+        <StackPanel Name="contents" Margin="0,50,626,0">
+            <TextBlock>
+            </TextBlock>
+        </StackPanel>
+        <Menu Background="White">
+            <MenuItem Header="Project">
+                <MenuItem Header="Close" Name="close" Click="close_Click"/>
+                <MenuItem Header="Save" Name="save" Click="save_Click"/>
+            </MenuItem>
+            <MenuItem Header="GameObject">
+                <MenuItem Name="rect" Header="Rectangle" Click="rect_Click" ToolTip="Add an new rectangle"/>
+                <MenuItem Header="Sprite" ToolTip="Add an new Sprite"/>
+                
+            </MenuItem>
+        </Menu>
+
+        <Canvas Name="canvas">
+
+        </Canvas>
+
+
+
+    </Grid>
+</Window>
