@@ -7,10 +7,12 @@ The scripting happens in c++.
 Here is a sample code that renders an image onto the screen.
 ```
 #include "Game.h"
-void Game::gameInit() {
+
+void Game::gameInit()
+{
 	hg::texture tx;
-	tx.load("Assets\\enemy.png");
-	newGameObject("Player", new hg::Sprite(10,10,10,10,tx,0));
+	tx.load("Assets\\Hugos.png");
+	newGameObject("Player", new hg::Sprite(500,200,10,10,tx,0));
 }
 			
 void Game::gameLoop(float delta){}

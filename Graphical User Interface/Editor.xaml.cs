@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using System.IO;
 
 namespace Graphical_User_Interface
 {
@@ -65,9 +66,10 @@ namespace Graphical_User_Interface
         List<ImageObject> images = new List<ImageObject>();
         List<RectangleObject> rectangles = new List<RectangleObject>();
 
-
-        public Editor()
+        string foldName = "New Project";
+        public Editor(string foldName)
         {
+            this.foldName = foldName;
             InitializeComponent();
             curGamObj.x = 50;
             curGamObj.y = 50;
@@ -75,7 +77,31 @@ namespace Graphical_User_Interface
             curGamObj.height = 50;
             curGamObj.location = "NUL";
             curGamObj.color = Color.FromRgb(100, 100, 100);
+            GenerateBoilerPlate();
             CompositionTarget.Rendering += tick;
+            
+        }
+        public void GenerateBoilerPlate()
+        {
+            try
+            {
+                string text = "" +
+                "#include \"Game.h\"\n" +
+                "void Game::gameInit(){\n}\n" +
+                "void Game::gameLoop(float delta){}";
+                File.WriteAllText(foldName + "\\Script.cpp", text);
+                codeArea.Text = text;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
+        void execute()
+        {
+            var r = File.ReadAllLines(foldName + "\\Script.cpp");
+            File.WriteAllText(r[0], "");
         }
 
         private void tick(object sender, EventArgs e)
@@ -87,7 +113,14 @@ namespace Graphical_User_Interface
 
         private void save_Click(object sender, RoutedEventArgs e)
         {
-            Console.Beep();
+            try
+            {
+                File.WriteAllText(foldName + "\\Script.cpp", codeArea.Text);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void close_Click(object sender, RoutedEventArgs e)
@@ -124,5 +157,22 @@ namespace Graphical_User_Interface
 
         }
 
+        private void codeArea_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.F11)
+            {
+                codeArea.FontSize++;
+            }
         }
+
+        private void Run_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Debug_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+    }
 }

@@ -9,7 +9,7 @@
     <Grid Background="#292929">
         <StackPanel Margin="298,0,0,0">
             <!--All propeties-->
-            <TextBox  TextWrapping="Wrap" Text="Project"/>
+            <TextBox  TextWrapping="Wrap" x:Name ="prName_inp" Text="Project"/>
             <ComboBox >
                 <ComboBoxItem Content="Top - down"/>
                 <ComboBoxItem Content="Sidescrolling platformer"/>

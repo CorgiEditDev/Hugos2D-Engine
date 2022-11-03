@@ -1,13 +1,20 @@
 #pragma once
 #include <iostream>
 #include "..\GameObject.h"
-
+#include "..\Settings.h"
 
 
 namespace hg {
 	struct texture {
 		void load(std::string filepath) {
 			if (!text.loadFromFile(filepath)) {
+				switch (unableToLoadResourceSeverity)
+				{
+				case 4:
+					abort();
+				default:
+					break;
+				}
 				std::cout << "Cant load the texture. Check if \"" << filepath << "\"is correct";
 			}
 			fpath = filepath;

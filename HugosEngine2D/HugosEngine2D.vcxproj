@@ -72,10 +72,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>C:\Users\mauri\source\repos\HugosEngine2D\HugosEngine2D\x64\Release</OutDir>
+    <OutDir>$(SolutionDir)x64\Release</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>C:\Users\mauri\source\repos\HugosEngine2D\HugosEngine2D\x64\Release</OutDir>
+    <OutDir>$(SolutionDir)x64\Release</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -98,7 +98,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Lib\SFML\include;C:\Users\mauri\source\repos\HugosEngine2D\HugosEngine2D\ImGui\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,7 +130,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)Lib\SFML\include;C:\Users\mauri\source\repos\HugosEngine2D\HugosEngine2D\ImGui\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -147,6 +147,7 @@
     <ClInclude Include="Core\GameObject.h" />
     <ClInclude Include="Core\GameObject\Rectangle.h" />
     <ClInclude Include="Core\Math.h" />
+    <ClInclude Include="Core\Settings.h" />
     <ClInclude Include="Core\stadfx.h" />
     <ClInclude Include="ImGui\imconfig-SFML.h" />
     <ClInclude Include="ImGui\imconfig.h" />

@@ -9,12 +9,11 @@
         WindowStyle="None"
         WindowState="Maximized">
     <Grid>
-
-        <StackPanel Name="contents" Margin="0,50,626,0">
+        <StackPanel Name="contents" Margin="0,50,642,0">
             <TextBlock>
             </TextBlock>
         </StackPanel>
-        <Menu Background="White">
+        <Menu Background="White" Margin="0,0,0,405">
             <MenuItem Header="Project">
                 <MenuItem Header="Close" Name="close" Click="close_Click"/>
                 <MenuItem Header="Save" Name="save" Click="save_Click"/>
@@ -22,15 +21,20 @@
             <MenuItem Header="GameObject">
                 <MenuItem Name="rect" Header="Rectangle" Click="rect_Click" ToolTip="Add an new rectangle"/>
                 <MenuItem Header="Sprite" ToolTip="Add an new Sprite"/>
-                
+
             </MenuItem>
+            <Button x:Name="Run" Content="Run" Width="40" BorderThickness="0" Click="Run_Click"/>
+            <Button x:Name="Debug" Content="Debug" Width="40" BorderThickness="0" Click="Debug_Click"/>
         </Menu>
 
-        <Canvas Name="canvas">
-
+        <Canvas Name="canvas" Margin="158,50,0,171" Background="#D5C9D3">
+            
         </Canvas>
-
-
+        
+        <TextBox BorderThickness="0" x:Name="codeArea" TextWrapping="Wrap" AcceptsReturn="True" KeyDown="codeArea_KeyDown"
+         Text="TextBox"  Margin="158,279,0,0" Background="#10002F" Foreground="White"
+         FontFamily="Assets/Fonts/segoeui.ttf"/>
+        
 
     </Grid>
 </Window>
