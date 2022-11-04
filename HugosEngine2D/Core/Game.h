@@ -57,14 +57,14 @@ public:
 		}
 		return ret;
 	}
-	hg::GameObject &getGameObject(const std::string& id, hg::GameObject::Type type) {
+	hg::GameObject *getGameObject(const std::string& id, hg::GameObject::Type type) {
 		switch (type)
 		{
 		case hg::GameObject::RectangleShape:
-			return *(hg::Rectangle*)rects.at(id);
+			return rects.at(id);
 			break;
 		case hg::GameObject::Sprite:
-			return *(hg::Sprite*)sprites.at(id);
+			return sprites.at(id);
 			break;
 		default:
 			std::cout << "getGameObject() - method is not implemented for this shape type yet.";

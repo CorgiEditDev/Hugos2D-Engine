@@ -51,8 +51,13 @@ namespace hg {
 			target.draw(sprite,shader);
 		}
 		void Update(const uint16_t deltaTime) {
+			hitbox.top = getPosition().y - getSize().y / 2;
+			hitbox.left = getPosition().x - getSize().x / 2;
+			hitbox.width = getSize().x;
+			hitbox.height = getSize().y;
 			getPhysics().update(deltaTime);
-			move(getPhysics().velocity, deltaTime);
+			setPosition(getPosition().x + getPhysics().velocity.x * deltaTime,
+			getPosition().y + getPhysics().velocity.y * deltaTime);			
 			sprite.setScale(getSize().x / txSize.x,getSize().y / txSize.y);
 			sprite.setPosition(getPosition());
 		}

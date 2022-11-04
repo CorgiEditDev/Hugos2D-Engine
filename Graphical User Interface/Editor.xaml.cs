@@ -85,17 +85,33 @@ namespace Graphical_User_Interface
         {
             try
             {
-                string text = "" +
-                "#include \"Game.h\"\n" +
-                "void Game::gameInit(){\n}\n" +
-                "void Game::gameLoop(float delta){}";
-                File.WriteAllText(foldName + "\\Script.cpp", text);
-                codeArea.Text = text;
+                if (!File.Exists(foldName + "\\Script.cpp"))
+                {
+                    string text = "" +
+                    "#include \"Game.h\"\n" +
+                    "void Game::gameInit(){\n}\n" +
+                    "void Game::gameLoop(float delta){}";
+
+                    File.WriteAllText(foldName + "\\Script.cpp", text);
+                }
+                else
+                {
+                    codeArea.Text = File.ReadAllText(foldName + "\\Script.cpp");
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            
+        }
+        void updateCodeArea()
+        {
+            codeArea.Text = File.ReadAllText(foldName + "\\Script.cpp");
+        }
+
+        void addLineToScript(string newText, int line_to_edit)
+        {
             
         }
         void execute()
@@ -125,15 +141,27 @@ namespace Graphical_User_Interface
 
         private void close_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult result = MessageBox.Show("Do you want to close this window?",
-            "Confirmation", MessageBoxButton.YesNo);
+            MessageBoxResult result = MessageBox.Show("Do you want to save?",
+            "Confirmation", MessageBoxButton.YesNoCancel);
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    this.Close();
+                    this.save_Click(null,null);
                     break;
                 case MessageBoxResult.No:
-                    return;
+                    MessageBoxResult result2 = MessageBox.Show("Sure",
+                    "Confirmation", MessageBoxButton.YesNo);
+                    switch (result2)
+                    {
+                        case MessageBoxResult.Yes:
+                            this.Close();
+                            break;
+                        case MessageBoxResult.No:
+                            return;
+                            break;
+                    }
+                    break;
+                case MessageBoxResult.Cancel: return;
             }
             
         }
@@ -154,7 +182,7 @@ namespace Graphical_User_Interface
             curGamObj.x += 100;
             rectangles.Add(new RectangleObject(newRectangle,canvas));
 
-
+            addLineToScript("newGameObject(\"Default\", new hg::Rectangle(sf::Vector2f(100, 100), sf::Vector2f(100, 100), sf::Color::Red, false, 456)); \")",3);
         }
 
         private void codeArea_KeyDown(object sender, KeyEventArgs e)
@@ -162,12 +190,23 @@ namespace Graphical_User_Interface
             if (e.Key == Key.F11)
             {
                 codeArea.FontSize++;
+            } else if (e.Key == Key.F10)
+            {
+                codeArea.FontSize--;
             }
         }
 
         private void Run_Click(object sender, RoutedEventArgs e)
         {
-
+            try
+            {
+                var polku = "C:\\Users\\mauri\\source\\repos\\HugosEngine2D\\HugosEngine2D\\Core\\Game.cpp";
+                File.WriteAllText(polku, codeArea.Text);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void Debug_Click(object sender, RoutedEventArgs e)
