@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Core\BreakableCube.h" />
     <ClInclude Include="Core\Display.h" />
     <ClInclude Include="Core\Game.h" />
     <ClInclude Include="Core\GameObject.h" />
@@ -158,11 +159,13 @@
     <ClInclude Include="ImGui\imstb_rectpack.h" />
     <ClInclude Include="ImGui\imstb_textedit.h" />
     <ClInclude Include="ImGui\imstb_truetype.h" />
+    <ClInclude Include="Core\Polygon.h" />
     <ClInclude Include="SCRIPT\Main.cpp" />
     <ClInclude Include="Core\GameObject\Sprite.h" />
     <ClInclude Include="Core\Shader.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Core\BreakableCube.cpp" />
     <ClCompile Include="Core\Display.cpp" />
     <ClCompile Include="Core\Start.cpp" />
     <ClCompile Include="Core\Game.cpp" />
@@ -175,6 +178,7 @@
     <ClCompile Include="ImGui\imgui_draw.cpp" />
     <ClCompile Include="ImGui\imgui_tables.cpp" />
     <ClCompile Include="ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="Core\Polygon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\Fragment_shader.frag" />

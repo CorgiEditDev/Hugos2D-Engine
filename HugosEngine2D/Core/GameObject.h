@@ -20,7 +20,7 @@ namespace hg {
 			return hitbox;
 		}
 		static enum Type {
-			RectangleShape, Sprite
+			RectangleShape, Sprite, BreakableObject
 		};
 		GameObject(sf::Vector2f pos, sf::Vector2f siz,bool hasPhys = false, const uint16_t i = rand()% 65535) : position(pos), size(siz),id(i)
 		{
@@ -42,17 +42,17 @@ namespace hg {
 		}
 		void move(sf::Vector2f offset, float d) {
 			offset.x *= 10;offset.y *= 10;
-			std::clamp(physics.velocity.x, (float)0, offset.x);
-			physics.velocity.x += sin((offset.x * (d / 250)) / 500);
-			std::clamp(physics.velocity.x, (float)0, offset.y);
-			physics.velocity.y += sin((offset.y * (d / 250)) / 500);
+			physics.velocity.y = std::clamp(physics.velocity.y, (float)0, offset.y);
+			physics.velocity.x += sin((offset.x * (d / 250)) / weight);
+			physics.velocity.x = std::clamp(physics.velocity.x, (float)0, offset.x);
+			physics.velocity.y += sin((offset.y * (d / 250)) / weight);
 		}
 		void move(float x,float y, float d) {
 			sf::Vector2f offset(x*10, y*10);
 			//std::clamp(physics.velocity.x, (float)0, offset.x);
-			physics.velocity.x += sin((offset.x * (d / 250)) / 500);
+			physics.velocity.x += sin((offset.x * (d / 250)) / weight);
 			//std::clamp(physics.velocity.x, (float)0, offset.y);
-			physics.velocity.y += sin((offset.y * (d / 250)) / 500);
+			physics.velocity.y += sin((offset.y * (d / 250)) / weight);
 		}
 		/// <summary>
 		/// Be aware : absMoveX and absMoveY also exist
@@ -80,7 +80,7 @@ namespace hg {
 	
 		sf::FloatRect hitbox;
 		uint16_t id;
-		uint16_t weight = 2000;
+		uint16_t weight = 200;
 	private:
 		
 		PhysicsComponent physics;

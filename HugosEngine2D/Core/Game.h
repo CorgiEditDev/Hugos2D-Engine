@@ -6,6 +6,7 @@
 #include "stadfx.h"
 #include "imgui.h"
 #include "imgui-SFML.h"
+#include "BreakableCube.h"
 
 
 
@@ -18,6 +19,13 @@ public:
 	void newGameObject(const std::string& id, hg::Sprite* obj) {
 		sprites.insert({ id,obj });
 	}
+	void newGameObject(const std::string& id, hg::BreakableObject* obj) {
+		brObjs.insert({ id,obj });
+	}
+
+
+
+
 	double calculateDistance(sf::Vector2f x, sf::Vector2f y)
 	{
 		return sqrt(pow(x.x - y.x, 2) +
@@ -66,12 +74,17 @@ public:
 		case hg::GameObject::Sprite:
 			return sprites.at(id);
 			break;
+		case hg::GameObject::BreakableObject:
+			return brObjs.at(id);
+			break;
 		default:
 			std::cout << "getGameObject() - method is not implemented for this shape type yet.";
 			break;
 		}
 	}
-	
+	hg::BreakableObject* getGameObjectBr(const std::string& id) {
+		return brObjs.at(id);
+	}
 	bool isKeyPressed(sf::Keyboard::Key key) {
 		return display.isKeyPressed(key);
 	}
@@ -96,6 +109,8 @@ private:
 	sf::View view;
 	std::map<std::string, hg::Rectangle*> rects;
 	std::map < std::string, hg::Sprite* > sprites;
+	std::map < std::string, hg::BreakableObject* > brObjs;
+
 	hg::Shader shader;
 	float deltaTime = 0.0f;
 	sf::Clock deltaCock;
@@ -124,6 +139,10 @@ private:
 			}
 			for (auto& rect : sprites) {
 				rect.second->draw(display,&shader);
+				rect.second->Update(deltaTime);
+			}
+			for (auto& rect : brObjs) {
+				rect.second->draw(display, &shader);
 				rect.second->Update(deltaTime);
 			}
 			
